@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+
+using namespace std ;
+typedef long long ll ;
+
+int main()
+{
+    ll sum = 0;
+    ll a = (ll)pow( 2 , 31 ) ;
+    cout << a << endl ;
+    for( int i = 1; ; i++ ){
+        sum+=i ;
+        //cout << sum << endl ;
+        if( sum > a ){
+            cout << i << endl ;
+            break ;
+        }
+    }
+}
