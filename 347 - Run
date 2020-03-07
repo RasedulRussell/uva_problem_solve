@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+bool isMyNumber( ll n ){
+    vector<int>v;
+    int uniquecheck[10];
+    memset(uniquecheck, 0, sizeof uniquecheck);
+    while(n){
+        v.push_back(n%10);
+        if(n%10 == 0){
+            return false;
+        }
+        uniquecheck[n%10]++;
+        n /= 10;
+    }
+    for(int i = 0; i < 10; i++){
+        if(uniquecheck[i] > 1){
+            return false;
+        }
+    }
+    reverse(v.begin(), v.end());
+    n = v.size();
+    int check[n];
+    memset( check, 0, sizeof check );
+    ///check[0]++;
+    int now = 0;
+    int pos = 0;
+    while(true){
+        check[pos]++;
+        if(check[pos] == 2){
+            break;
+        }
+        pos = (pos+v[pos])%n;
+    }
+    bool flag = true;
+    for(int i = 0; i < n; i++){
+        if( i==0 ){
+            if(check[i] != 2){
+                flag = false;
+            }
+            continue;
+        }
+        if( check[i] != 1 ){
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+
+int main(){
+    ll n;
+    int t = 1;
+    while(cin >> n){
+        if(n==0){
+            break;
+        }
+        for(ll i = n; i <= 99999999; i++){
+            if( isMyNumber(i) == true ){
+                printf("Case %d: %lld\n",t++,i);
+                break;
+            }
+        }
+    }
+}
